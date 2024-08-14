@@ -16,4 +16,9 @@ class AdminMiddleware
 
         return redirect('/')->with('error', 'You do not have admin access.');
     }
+
+    public function index()
+    {
+        return view('layouts.admin');
+    }
 }
