@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\PhotoController;
+//use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,6 +12,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('posts', PostController::class);
     //Route::resource('photos', PhotoController::class);
     Route::get('/home', [PostController::class, 'index'])->name('home');
+});
+
+Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
+    
+
 });
 
 Auth::routes();
