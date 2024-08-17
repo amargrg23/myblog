@@ -14,6 +14,8 @@ class AdminMiddleware
             return $next($request);
         }
 
+        // Logout the user if they are not an admin
+        Auth::logout();
         return redirect('/')->with('error', 'You do not have admin access.');
     }
 

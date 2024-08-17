@@ -20,6 +20,7 @@ class Post extends Model
     }
 
     public function user(): BelongsTo {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', '_id'); // Ensure the correct foreign key and local key are specified
     }
+    
 }

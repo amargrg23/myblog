@@ -33,28 +33,39 @@
       <a href="#" class="navbar-brand d-flex align-items-center">
         <strong>Admin Dashboard</strong>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <div class="dropdown">
+        <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+          Menu
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li><a class="dropdown-item" href="/admin/users">User Management</a></li>
+          <li><a class="dropdown-item" href="/admin/posts">Blog Post Management</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <form method="POST" action="{{ route('logout') }}">
+            @csrf
+              <button type="submit" class="dropdown-item text-danger">Logout</button>
+            </form>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </header>
 
 <main>
-
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">Welcome to Admin Dashboard</h1>
-        <p class="lead text-body-secondary">Manage your users, blog posts, and other site content from here.</p>
+        <p class="lead text-body-secondary">Manage your users, and  blog posts from here.</p>
       </div>
     </div>
   </section>
 
   <div class="album py-5 bg-body-tertiary">
     <div class="container">
-
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="row row-cols-1 row-cols-sm-2 g-2">
         <div class="col">
           <div class="card shadow-sm">
             <div class="card-body">
@@ -83,23 +94,13 @@
             </div>
           </div>
         </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">Site Statistics</h5>
-              <p class="card-text">View important statistics about your site's performance.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a href="/admin/statistics" class="btn btn-sm btn-outline-secondary">View Stats</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 
+</main>
+<main class="py-4">
+  @yield('content')
 </main>
 
 <footer class="text-body-secondary py-5">
@@ -107,9 +108,10 @@
     <p class="float-end mb-1">
       <a href="#">Back to top</a>
     </p>
-    <p class="mb-1">&copy; 2024 Your Company Name</p>
+    <p class="mb-1">&copy; 2024 Amar Gurung</p>
   </div>
 </footer>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   </body>
