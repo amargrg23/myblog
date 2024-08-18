@@ -28,15 +28,20 @@
             <label for="email" class="form-label">Email address</label>
             <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}" required>
         </div>
-        
+
         <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <label for="role" class="form-label">Role</label>
+            <div class="col-md-6">
+                <select id="role" class="form-select" name="role" value="{{ old('role', $user->role) }}" required>
+                        <option value="admin">Admin</option>
+                        <option value="author">Author</option>
+                </select>
+            </div>
         </div>
         
         <div class="mb-3">
-            <label for="password_confirmation" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+            <label for="password" class="form-label">Enter user's password</label>
+            <input type="password" class="form-control" id="password" name="password">
         </div>
         
         <button type="submit" class="btn btn-primary">Edit</button>

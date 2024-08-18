@@ -20,7 +20,7 @@ Route::group(['middleware' => ['auth']], function() {
 });
 
 // Admin Routes
-Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     // Dashboard
     Route::get('/', [AdminMiddleware::class, 'index'])->name('dashboard');
 

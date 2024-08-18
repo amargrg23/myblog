@@ -46,7 +46,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'is_admin' => 'required|boolean',
+            'role' => 'required|string',
         ]);
 
         // Create a new user
@@ -54,7 +54,7 @@ class UserController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'is_admin' => $validated['is_admin'],
+            'role' => $validated['role'],
         ]);
 
         // Redirect back to the user listing page with a success message
@@ -68,23 +68,23 @@ class UserController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255,' . $id,
-            'password' => 'nullable|string|min:8|confirmed',
+            'password' => 'required|string',
+            'role' => 'required|string'
         ]);
 
         // Find the user by ID
         $user = User::findOrFail($id);
 
-        // Update the user's name and email
+        // Verify the current password
+        if (!Hash::check($validated['password'], $user->password)) {
+            return redirect()->back()->withErrors(['password' => 'Password is incorrect.']);
+        }
+
+        // Update the user's name, email, and role
         $user->name = $validated['name'];
         $user->email = $validated['email'];
-
-        // Check if the password field is filled and matches the confirmation
-        if ($request->filled('password')) {
-            if ($validated['password'] !== $request->password_confirmation) {
-                return redirect()->back()->withErrors(['password' => 'Password and confirmation do not match.']);
-            }
-            $user->password = Hash::make($validated['password']);
-        }
+        $user->role = $validated['role'];
+        
 
         // Save the updated user information
         $user->save();
@@ -92,6 +92,7 @@ class UserController extends Controller
         // Redirect back to the user listing page with a success message
         return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
     }
+
 
     // Remove the specified user from storage
     public function destroy(User $user)
