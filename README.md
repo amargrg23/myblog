@@ -7,97 +7,64 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-# Basic Blog Application
-### GitHub Repository URL
-[GitHub Repository](https://github.com/amargrg23/myblog)
-## Project Overview
+# Enhanced Blog Application with Authentication and Admin Panel
+## GitHub Repository
 
-This project involves creating a basic CRUD (Create, Read, Update, Delete) application using Laravel 11. The application allows users to manage blog posts and utilizes various Laravel features and concepts. The development process includes setting up the environment, creating the database, defining routes, creating models and migrations, setting up factories and seeders, creating controllers, designing Blade views, testing, and version control with Git and GitHub.
+The source code for this project is available at the following GitHub repository:
 
-## Project Setup and Initialization
+[GitHub Repository URL](https://github.com/amargrg23/myblog/tree/feature/auth-admin-panel)
 
-### Development Environment Setup
-- **Visual Studio Code (VS Code):** Installed for code editing.
-- **Node.js:** Installed to manage JavaScript dependencies.
-- **Git:** Installed for version control and created a GitHub account to host the project repository.
-- **Composer:** Installed for PHP dependency management.
-- **XAMPP (macOS):** Installed to handle MySQL and Apache server.
+## Overview
 
-### Laravel Project Creation
-- Created a new Laravel project using Composer.
-- Initialized Git in the project directory.
-- Created a GitHub repository and linked it to the local project.
-- Committed the initial setup and pushed to GitHub.
+This project enhances the basic blog application from Assessment 1 by adding user authentication, an admin panel, and role-based access control using Laravel. The aim is to build a more robust and secure application.
 
-## Database Setup and Configuration
+## Approach
 
-### Database Creation
-- Created a MySQL database named `blog` using XAMPP.
-- Configured the `.env` file with the database details to connect Laravel to MySQL.
+### 1. Project Setup
+The project was initialized using the basic blog application from Assessment 1. A new branch named `feature/auth-admin-panel` was created to implement the new features.
 
-## Defining Routes
+### 2. MongoDB Integration
+The application was configured to use MongoDB as the database, following the setup demonstrated in Lecture 4. The `mongodb/laravel-mongodb` package was utilized to facilitate this integration.
 
-### Resource Routes
-- Defined resource routes for the `posts` in `web.php` using Laravel's `Route::resource` method to handle CRUD operations.
+### 3. Authentication Setup
+- **Laravel UI Installation:** Installed Laravel UI using the command `composer require laravel/ui`.
+- **Authentication Scaffolding:** Generated authentication scaffolding with Bootstrap using `php artisan ui bootstrap --auth`.
+- **Bootstrap Setup:** Installed required npm packages and compiled assets using `npm install && npm run dev`.
+- **Layout Update:** Updated the master layout to include Bootstrap styling for a consistent design.
 
-## Models and Migrations
+### 4. Admin Panel and Middleware (Bonus)
+- **Middleware Creation:** Generated custom middleware with `php artisan make:middleware AdminMiddleware` to restrict access to the admin panel.
+- **Middleware Implementation:** Implemented the middleware to check if the authenticated user has admin privileges.
+- **Route Protection:** Applied the middleware to admin routes in `web.php`, ensuring they are accessible only by admins.
 
-### Post Model and Migration
-- Generated the `Post` model and migration using the Artisan command.
-- Defined the schema for the `posts` table in the migration file.
-- Ran the migration to create the `posts` table in the database.
+### 5. Admin Routes
+- **Route Definition:** Defined routes for the admin panel with an `Admin` prefix in `routes/web.php`.
+- **Route Protection:** Ensured these routes are protected by the custom middleware, allowing access only to authorized users.
+- **Admin Functionality:** Created routes for managing users and blog posts within the admin panel.
 
-## Factory and Seeder
+### 6. Controllers and Views
+- **Controller Creation:** Generated controllers for managing users (`Admin/UserController`) and blog posts (`Admin/PostController`) using `php artisan make:controller`.
+- **CRUD Operations:** Implemented CRUD operations with appropriate validation in the controllers.
+- **View Creation:** Designed the admin panel views using Bootstrap 5.3 examples, including listing, creating, editing, and deleting users and blog posts.
+- **Layout:** Created a new layout for the admin panel (`admin.blade.php`) with a dashboard template for a cohesive look.
 
-### Factory and Seeder Creation
-- Generated a factory for the `Post` model to create dummy data.
-- Generated a seeder for the `posts` table to seed the database with initial records.
-- Defined the data structure in the factory and ran the seeder to populate the database with 10 sample posts.
+### 7. Role-Based Access Control
+- **Role Addition:** Added roles (admin, author, user) to the user model and database.
+- **Registration Process:** Updated the registration process to allow admins to assign roles during user creation.
+- **Access Control:** Ensured that only admins can access user management functionalities.
 
-## Controllers
-
-### PostController
-- Generated the `PostController` using the Artisan command.
-- Implemented CRUD operations in the controller methods (`index`, `create`, `store`, `show`, `edit`, `update`, `destroy`).
-- Added validation for data where required (e.g., in the `store` and `update` methods).
-
-## Blade Views
-
-### Master Layout
-- Created a master layout file `app.blade.php` to define the main structure of the application.
-- Used `@yield` and `@section` directives to manage content areas in different views.
-
-### CRUD Views
-- Created Blade views for listing (`index.blade.php`), creating (`create.blade.php`), showing (`show.blade.php`), editing (`edit.blade.php`), and deleting posts.
-
-## Testing
-
-### Functional Testing
-- Tested each functionality (Create, Read, Update, Delete) by interacting with the web interface.
-- Ensured that each operation works as expected and validated data integrity.
-
-## Version Control and GitHub
-
-### Version Control
-- Used Git for version control, committing changes after each major step.
-- Pushed all commits to the GitHub repository to maintain a history of the project's development.
+### 8. Testing
+- **Authentication Testing:** Thoroughly tested the authentication system to ensure proper functionality.
+- **Admin Functionality Testing:** Verified the CRUD operations for users and blog posts in the admin panel.
+- **Access Control Testing:** Ensured that non-admin users cannot access the admin panel or restricted routes.
 
 ## Challenges Faced
 
-### Environment Configuration
-- Faced issues with setting up the development environment, particularly with Composer dependencies. Resolved by ensuring correct versions and configurations.
+- **MongoDB Integration:** Required attention to schema design and query syntax differences compared to relational databases.
+- **Role-Based Access Control:** Implementing a secure and flexible role-based system required careful planning and implementation.
+- **UI Consistency:** Ensuring consistent Bootstrap styling across various views demanded meticulous attention to detail.
 
-### Database Connection
-- Encountered connection issues with MySQL due to incorrect configuration in the `.env` file. Fixed by verifying and correcting the database credentials.
 
-### Validation Errors
-- Handled validation errors in form submissions by implementing proper error handling in the controller methods and displaying error messages in the views.
 
-### Blade Syntax
-- Initially had some trouble with Blade syntax and directives, but overcame this by referring to the Laravel documentation and examples.
-
-## Conclusion
-
-This project provided hands-on experience with Laravel's fundamental features, including routing, MVC structure, Blade templating, database migrations, seeding, and version control. By following the guidelines and overcoming the challenges, a functional CRUD application for managing blog posts was successfully created and deployed to GitHub.
 
 
