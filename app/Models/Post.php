@@ -12,6 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Post extends Model
 {
     use HasFactory, Notifiable, HasApiTokens;
+    protected $table = 'posts';
     protected $fillable = ['title', 'content', 'user_id'];
     protected static function booted() {
         static::creating(function (Post $post) {

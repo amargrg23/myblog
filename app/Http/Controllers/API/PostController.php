@@ -18,18 +18,24 @@ class PostController extends Controller
         ], 200);
     }
 
-    public function show(Post $post)
-    {
-        if ($post->user_id != Auth::id()) {
-            return response()->json([
-                'message' => 'Unauthorized'
-            ], 403);
-        }
+    public function show($id)
+{
+    // Find the post by ID
+    $post = Post::findOrFail($id);
 
+    // Check if the authenticated user is the owner of the post
+    if ($post->user_id !== Auth::id()) {
         return response()->json([
-            'data' => $post,
-            'message' => 'Post retrieved successfully'
-        ], 200);
+            'message' => 'Unauthorized'
+        ], 403);
     }
+
+    // Return the post data if authorized
+    return response()->json([
+        'data' => $post,
+        'message' => 'Post retrieved successfully'
+    ], 200);
+}
+
 
 }
