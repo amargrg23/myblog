@@ -31,4 +31,5 @@ class PostController extends Controller
             'message' => 'Post retrieved successfully'
         ], 200);
     }
+
 }
