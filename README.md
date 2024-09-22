@@ -7,62 +7,85 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-# Enhanced Blog Application with Authentication and Admin Panel
+# Laravel with sanctum
 ## GitHub Repository
 
 The source code for this project is available at the following GitHub repository:
 
-[GitHub Repository URL](https://github.com/amargrg23/myblog/tree/feature/auth-admin-panel)
+[GitHub Repository URL](https://github.com/amargrg23/myblog/tree/feature/sanctum)
 
-## Overview
+## Description
 
-This project enhances the basic blog application from Assessment 1 by adding user authentication, an admin panel, and role-based access control using Laravel. The aim is to build a more robust and secure application.
+This is a Laravel-based API for managing blog posts. It allows users to create, retrieve, and manage their blog content efficiently using MongoDB.
 
-## Approach
+## API Endpoints
 
-### 1. Project Setup
-The project was initialized using the basic blog application from Assessment 1. A new branch named `feature/auth-admin-panel` was created to implement the new features.
+- **GET /api/posts**: Retrieve a list of all blog posts.
+- **GET /api/posts/{id}**: Retrieve details of a single blog post.
 
-### 2. MongoDB Integration
-The application was configured to use MongoDB as the database, following the setup demonstrated in Lecture 4. The `mongodb/laravel-mongodb` package was utilized to facilitate this integration.
+## Requirements
 
-### 3. Authentication Setup
-- **Laravel UI Installation:** Installed Laravel UI using the command `composer require laravel/ui`.
-- **Authentication Scaffolding:** Generated authentication scaffolding with Bootstrap using `php artisan ui bootstrap --auth`.
-- **Bootstrap Setup:** Installed required npm packages and compiled assets using `npm install && npm run dev`.
-- **Layout Update:** Updated the master layout to include Bootstrap styling for a consistent design.
+- PHP >= 8.0
+- Composer
+- MongoDB
+- Node.js (for frontend, if applicable)
 
-### 4. Admin Panel and Middleware (Bonus)
-- **Middleware Creation:** Generated custom middleware with `php artisan make:middleware AdminMiddleware` to restrict access to the admin panel.
-- **Middleware Implementation:** Implemented the middleware to check if the authenticated user has admin privileges.
-- **Route Protection:** Applied the middleware to admin routes in `web.php`, ensuring they are accessible only by admins.
+## Setup Instructions
 
-### 5. Admin Routes
-- **Route Definition:** Defined routes for the admin panel with an `Admin` prefix in `routes/web.php`.
-- **Route Protection:** Ensured these routes are protected by the custom middleware, allowing access only to authorized users.
-- **Admin Functionality:** Created routes for managing users and blog posts within the admin panel.
+### 1. Clone the Repository
 
-### 6. Controllers and Views
-- **Controller Creation:** Generated controllers for managing users (`Admin/UserController`) and blog posts (`Admin/PostController`) using `php artisan make:controller`.
-- **CRUD Operations:** Implemented CRUD operations with appropriate validation in the controllers.
-- **View Creation:** Designed the admin panel views using Bootstrap 5.3 examples, including listing, creating, editing, and deleting users and blog posts.
-- **Layout:** Created a new layout for the admin panel (`admin.blade.php`) with a dashboard template for a cohesive look.
+```bash
+git clone https://github.com/yourusername/your-repo-name.git
+cd your-repo-name
+```
 
-### 7. Role-Based Access Control
-- **Role Addition:** Added roles (admin, author, user) to the user model and database.
-- **Registration Process:** Updated the registration process to allow admins to assign roles during user creation.
-- **Access Control:** Ensured that only admins can access user management functionalities.
+### 2. Install Dependencies
+Make sure you have Composer installed. Run the following command to install the PHP dependencies:
+```bash
+composer install
+```
 
-### 8. Testing
-- **Authentication Testing:** Thoroughly tested the authentication system to ensure proper functionality.
-- **Admin Functionality Testing:** Verified the CRUD operations for users and blog posts in the admin panel.
-- **Access Control Testing:** Ensured that non-admin users cannot access the admin panel or restricted routes.
+### 3. Configure Environment Variables
+Rename the .env.example file to .env and update the database connection details:
+```bash
+cp .env.example .env
+```
+
+### 4. Generate Application Key
+Run the following command to generate a new application key:
+```bash
+php artisan key:generate
+```
+
+### 5. Run Migrations
+If you have migrations (for example, for users), run:
+```bash
+php artisan migrate
+```
+
+### 6.  Start the Server
+You can use the built-in PHP server to run the application locally:
+```bash
+php artisan serve
+```
+By default, the application will be accessible at http://localhost:8000.
+
+### 7. Testing the API
+You can use tools like Postman or cURL to test the API endpoints. Ensure your server is running and make requests to the specified endpoints.
+
+### 8. Approach
+In developing this API, I focused on creating a clean and modular architecture that leverages Laravel's strengths in routing, middleware, and Eloquent ORM for MongoDB integration. The main approach involved:
+- **Setting Up the Environment:** Ensured all dependencies were correctly configured, including MongoDB.
+- **Defining API Endpoints:** Carefully designed RESTful endpoints to facilitate easy access to blog data.
+- **Implementing Middleware:** Used middleware for authentication and validation to enhance security and data integrity.
+- **Error Handling::** Implemented structured error handling to provide meaningful responses for various failure scenarios.
 
 ## Challenges Faced
 
-- **MongoDB Integration:** Required attention to schema design and query syntax differences compared to relational databases.
-- **Role-Based Access Control:** Implementing a secure and flexible role-based system required careful planning and implementation.
-- **UI Consistency:** Ensuring consistent Bootstrap styling across various views demanded meticulous attention to detail.
+- **MongoDB Integration:** Ensuring that Laravel properly communicates with MongoDB required thorough understanding and configuration of the MongoDB driver.
+- **Authentication:** Setting up Sanctum for user authentication posed initial difficulties, particularly with token management and securing routes.
+- **Data Validation:**  Implementing robust validation for incoming requests was crucial to avoid issues with malformed data, requiring careful planning of validation rules.
+- **Testing:**  Developing comprehensive tests for the API endpoints took significant effort to ensure reliability and correct functionality.
 
 
 
