@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Auth::user()->posts;
+        $posts = Post::all();
         return response()->json([
             'data' => $posts,
             'message' => 'Posts retrieved successfully'
@@ -23,14 +23,7 @@ class PostController extends Controller
     // Find the post by ID
     $post = Post::findOrFail($id);
 
-    // Check if the authenticated user is the owner of the post
-    if ($post->user_id !== Auth::id()) {
-        return response()->json([
-            'message' => 'Unauthorized'
-        ], 403);
-    }
-
-    // Return the post data if authorized
+    // Return the post data
     return response()->json([
         'data' => $post,
         'message' => 'Post retrieved successfully'
